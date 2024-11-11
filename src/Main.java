@@ -1,16 +1,49 @@
 import java.util.Arrays;
 import java.util.Random;
+import java.util.Scanner;
 
-//TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
-// click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
 public class Main {
     public static void main(String[] args) {
-        int filas = 4;
-        int columnas = 5;
-        int[][] matriz = new int[filas][columnas];
-
+        Scanner input = new Scanner(System.in);
         Random random = new Random();
 
+        int filas = 0;
+        int columnas = 0;
+
+        //Pidiendo al usuario un número de filas entero
+        do {
+            System.out.println("Introduce un valor entero positivo para las filas:");
+            while (!input.hasNextInt()) { //Verificación de números enteros
+                System.out.println("Error: debes ingresar un número entero positivo.");
+                input.next(); //Limpia el Buffer
+            }
+            filas = input.nextInt();
+            if (filas <= 0) {
+                System.out.println("Error: debes ingresar un número entero positivo.");
+            }
+        } while (filas <= 0);
+
+        System.out.println("Correcto has introducido" + filas + "filas.");
+
+        // Pidiendo al usuario un número de columnas entero
+        do {
+            System.out.println("Introduce un valor entero positivo para las columnas:");
+            while (!input.hasNextInt()) { //Verificación de números enteros
+                System.out.println("Error: debes ingresar un número entero positivo.");
+                input.next(); //Limpia el Buffer
+            }
+            columnas = input.nextInt();
+
+            if (columnas <= 0) {
+                System.out.println("Error: debes ingresar un número entero positivo.");
+            }
+        } while (columnas <= 0);
+
+        System.out.println("Correcto has introducido" + columnas + "columnas.");
+
+        //Generando la matriz
+
+        int[][] matriz = new int[filas][columnas];
         //matriz con valores aleatorios
 
         for (int i= 0; i< matriz.length; i++) {
@@ -25,6 +58,8 @@ public class Main {
             }
             System.out.println();
         }
+
+        input.close();
     }
 }
 
