@@ -44,22 +44,55 @@ public class Main {
         //Generando la matriz
 
         int[][] matriz = new int[filas][columnas];
-        //matriz con valores aleatorios
 
+        //matriz con valores aleatorios
         for (int i= 0; i< matriz.length; i++) {
-            for (int j = 0; j <matriz[i].length; j++) {
+            for (int j = 0; j < matriz[i].length; j++) {
                 matriz[i][j] = random.nextInt(9) + 1;
             }
         }
-        System.out.println("Matriz generada:");
-        for (int i = 0; i < matriz.length; i++) {
-            for (int j = 0; j < matriz[i].length; j++) {
-                System.out.print(matriz[i][j] + " ");
+            System.out.println("Matriz generada:");
+            for (int i = 0; i < matriz.length; i++) {
+                for (int j = 0; j < matriz[i].length; j++) {
+                    System.out.print(matriz[i][j] + " ");
+                }
+                System.out.println();
             }
-            System.out.println();
+
+        // Iniciando el Menú principal
+            mostrarMenu(input);
+            input.close();
         }
 
-        input.close();
+        //Ménu opciones
+        private static void mostrarMenu(Scanner scanner){
+            while(true){
+                System.out.println("\nMenú de opciones:");
+                System.out.println("[2] Poner bomba");
+                System.out.println("[1] Mostrar matriz");
+                System.out.println("[0] Salir");
+
+                String opcion = scanner.nextLine();
+                switch (opcion){
+                    case "2":
+                        ponerBomba(scanner); break;
+                    case "1":
+                        mostrarMatriz(); break;
+                    case "0":
+                        System.out.println("Saliendo del programa");
+                    return;
+                    default:System.out.println("Opción invalida. Por favor, elija nuevamente.");
+                    break;
+                }
+            }
+        }
+        // Creando poner Bomba
+        private static void ponerBomba(Scanner scanner){
+            System.out.println("Generando la Bomba.");
+     }
+    // Creando mostrar Matriz
+        private static void mostrarMatriz(){
+        System.out.println("Mostrando la Matriz.");
     }
 }
 
