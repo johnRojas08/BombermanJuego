@@ -60,12 +60,12 @@ public class Main {
             }
 
         // Iniciando el Menú principal
-            mostrarMenu(input);
+            mostrarMenu(input, matriz);
             input.close();
         }
 
         //Ménu opciones
-        private static void mostrarMenu(Scanner scanner){
+        private static void mostrarMenu(Scanner scanner, int[][] matriz){
             while(true){
                 System.out.println("\nMenú de opciones:");
                 System.out.println("[2] Poner bomba");
@@ -75,9 +75,11 @@ public class Main {
                 String opcion = scanner.nextLine();
                 switch (opcion){
                     case "2":
-                        ponerBomba(scanner); break;
+                        ponerBomba(scanner, matriz);
+                        break;
                     case "1":
-                        mostrarMatriz(); break;
+                        mostrarMatriz(matriz);
+                        break;
                     case "0":
                         System.out.println("Saliendo del programa");
                     return;
@@ -87,12 +89,41 @@ public class Main {
             }
         }
         // Creando poner Bomba
-        private static void ponerBomba(Scanner scanner){
-            System.out.println("Generando la Bomba.");
+        private static void ponerBomba(Scanner scanner, int[][] matriz){
+            System.out.println("Introudce las coodernadas de la Bomba (x,y):");
+            int x = -1;
+            int y = -1;
+
+        // Coordenas válidas
+        while(true){
+            System.out.println("x:");
+            x = scanner.nextInt();
+            System.out.println("y:");
+            y = scanner.nextInt();
+            scanner.nextLine();
+
+            if (x >= 0 && x< matriz.length && y >= 0 && y< matriz[0].length){
+                matriz[x][y] = 0;
+                System.out.println("Bomba colocada en(" + x + "," + y + ")");
+                break;
+
+            }else{
+                System.out.println("Coordenas inválidas, intentelo otra vez.");
+            }
+
+        }
+
      }
     // Creando mostrar Matriz
-        private static void mostrarMatriz(){
+        private static void mostrarMatriz(int[][] matriz){
         System.out.println("Mostrando la Matriz.");
+        for( int i = 0 ; i < matriz.length; i++){
+            for( int j = 0; j < matriz[i].length; j++){
+                System.out.println(matriz[i][j] + " ");
+            }
+        System.out.println();
+        }
+
     }
 }
 
