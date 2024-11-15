@@ -41,23 +41,16 @@ public class Main {
 
         System.out.println("Correcto has introducido" + columnas + "columnas.");
 
-        //Generando la matriz
+        //Generando la matriz con valores aleatorios
 
         int[][] matriz = new int[filas][columnas];
-
-        //matriz con valores aleatorios
         for (int i= 0; i< matriz.length; i++) {
             for (int j = 0; j < matriz[i].length; j++) {
                 matriz[i][j] = random.nextInt(9) + 1;
             }
         }
             System.out.println("Matriz generada:");
-            for (int i = 0; i < matriz.length; i++) {
-                for (int j = 0; j < matriz[i].length; j++) {
-                    System.out.print(matriz[i][j] + " ");
-                }
-                System.out.println();
-            }
+            mostrarMatriz(matriz);
 
         // Iniciando el Menú principal
             mostrarMenu(input, matriz);
@@ -100,7 +93,7 @@ public class Main {
             x = scanner.nextInt();
             System.out.println("y:");
             y = scanner.nextInt();
-            scanner.nextLine();
+            scanner.nextLine(); //limpia el buffer
 
             if (x >= 0 && x< matriz.length && y >= 0 && y< matriz[0].length){
                 matriz[x][y] = 0;
@@ -113,12 +106,68 @@ public class Main {
 
         }
 
-     }
+     // Calculo del valor de explosión
+    int valorExplosion = calcularValorExplosion(matriz,x,y);
+    System.out.println("Valor explosión: " + valorExplosion);
+
+    //Actualización de la matriz a 0 la fina x y la columna y
+    actualizarMatriz(matriz, x, y);
+
+    //Mostra la matriz actualizada
+    mostrarMatriz(matriz);
+
+    // Comprobación, si el juego ha terminado
+    if (juegoTerminado(matriz)) {
+        System.out.println("¡Fin del juego Todos los valores son 0.");
+        System.exit(0);
+       }
+
+    }
+
+    private static int calcularValorExplosion(int[][] matriz, int x, int y) {
+        int suma = 0;
+
+        // Sumar la fila x
+        for (int j = 0; j < matriz[x].length; j++) {
+            suma += matriz[x][y];
+        }
+        // Suma la columna y
+        for (int i = 0; i < matriz.length; i++) {
+            if (i != x) {
+                suma += matriz[i][y];
+            }
+        }
+
+        return suma;
+    }
+
+    private static void actualizarMatriz(int[][] matriz, int x, int y) {
+        // Poner a 0 la fila x
+        for (int j = 0; j < matriz[x].length; j++) {
+            matriz[x][y] = 0;
+        }
+
+        // Poner a 0 la columna y
+        for (int i = 0; i < matriz.length; i++) {
+            matriz[i][y] = 0;
+        }
+    }
+
+    private static boolean juegoTerminado(int[][] matriz) {
+        for (int i = 0; i < matriz.length; i++) {
+            for (int j = 0; j < matriz[i].length; j++) {
+                if (matriz[i][j] != 0) {
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+
     // Creando mostrar Matriz
-        private static void mostrarMatriz(int[][] matriz){
-        System.out.println("Mostrando la Matriz.");
-        for( int i = 0 ; i < matriz.length; i++){
-            for( int j = 0; j < matriz[i].length; j++){
+        private static void mostrarMatriz(int[][] matriz) {
+        for( int i = 0 ; i < matriz.length; i++) {
+            for( int j = 0; j < matriz[i].length; j++) {
                 System.out.println(matriz[i][j] + " ");
             }
         System.out.println();
