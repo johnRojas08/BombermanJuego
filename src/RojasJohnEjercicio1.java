@@ -39,7 +39,6 @@ public class RojasJohnEjercicio1 {
         } while (valor <= 0);
         return valor;
         }
-
         //Ménu opciones
         private static void mostrarMenu(Scanner scanner, int[][] matriz) {
             while(true){
